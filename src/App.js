@@ -1,52 +1,32 @@
-import React, { useEffect } from "react";
-import { API, Auth } from "aws-amplify";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import Home from "./scenes/Home/";
+import Page from "./scenes/Page/";
+import AllPagesViews from "./scenes/AllPagesViews/";
+import ViewsByPageId from "./scenes/ViewsByPageId/";
+import ViewsByCountry from "./scenes/ViewsByCountry/";
+import RateViewsByPageId from "./scenes/RateViewsByPageId/";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Container from "react-bootstrap/Container";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function App() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const apiName = "players";
-      const path = "/players/123";
-      const myInit = {
-        // OPTIONAL
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${(await Auth.currentSession())
-            .getIdToken()
-            .getJwtToken()}`,
-        }, // OPTIONAL
-        response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-      };
-
-      API.get(apiName, path, myInit)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    fetchData();
-  }, []);
+  const history = createBrowserHistory();
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container fluid className="mt-5">
+        <Router history={history}>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/allPagesViews" component={AllPagesViews} />
+            <Route path="/viewsByPageId" component={ViewsByPageId} />
+            <Route path="/viewsByCountry" component={ViewsByCountry} />
+            <Route path="/rateViewsByPageId" component={RateViewsByPageId} />
+            <Route path="/page/:id" exact component={Page} />
+          </Switch>
+        </Router>
+      </Container>
     </div>
   );
 }

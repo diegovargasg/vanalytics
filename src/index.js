@@ -2,21 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Amplify, { API } from "aws-amplify";
 import * as serviceWorker from "./serviceWorker";
+import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
-
-/*Amplify.configure({
-  API: {
-    endpoints: [
-      {
-        name: "players",
-        endpoint:
-          "https://b5l0f7pdee.execute-api.eu-central-1.amazonaws.com/prod",
-      },
-    ],
-  },
-});*/
 
 Amplify.configure(awsExports);
 
