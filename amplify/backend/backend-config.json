@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"veeva01ba27b0": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
