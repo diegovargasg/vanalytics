@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"veevaad3afc86": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

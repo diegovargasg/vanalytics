@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-veeva-dev-194036-authRole",
+            "UnauthRoleArn": "arn:aws:iam::617242250642:role/amplify-veeva-dev-194036-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::617242250642:role/amplify-veeva-dev-194036-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-veeva-dev-194036-deployment",
+            "UnauthRoleName": "amplify-veeva-dev-194036-unauthRole",
+            "StackName": "amplify-veeva-dev-194036",
+            "StackId": "arn:aws:cloudformation:eu-central-1:617242250642:stack/amplify-veeva-dev-194036/7df1a4c0-aff8-11ea-9142-02508c92de46",
+            "AmplifyAppId": "d1wua8xg2k8mox"
+        },
+        "categories": {
+            "auth": {
+                "veevaad3afc86": {}
+            }
+        }
+    }
+}
