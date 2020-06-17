@@ -19,7 +19,7 @@ function Home(props) {
           <Link to="/viewsByCountry">Views by country</Link>
         </li>
         <li>
-          <Link to="/rateViewsByPageId">Views by browser</Link>
+          <Link to="/viewsByBrowser">Views by browser</Link>
         </li>
         <li>
           <Link to="/rateViewsByPageId">Rate Views by pageId</Link>

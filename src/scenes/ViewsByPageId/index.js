@@ -6,7 +6,7 @@ function ViewsByPageId(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiName = "users";
+      const apiName = "vAPI";
       const path = "/page/1";
       const myInit = {
         headers: {

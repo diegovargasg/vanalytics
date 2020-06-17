@@ -6,8 +6,8 @@ function ViewsByPageId(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiName = "users";
-      const path = "/page/1/rate";
+      const apiName = "vAPI";
+      const path = "/pages/rates";
       const myInit = {
         headers: {
           "Content-Type": "application/json",
@@ -20,8 +20,7 @@ function ViewsByPageId(props) {
 
       API.get(apiName, path, myInit)
         .then((response) => {
-          console.log(response);
-          setResponse(JSON.stringify(response.Items));
+          setResponse(JSON.stringify(response));
         })
         .catch((error) => {
           console.log(error);

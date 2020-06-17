@@ -6,7 +6,7 @@ function AllPagesViews(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiName = "users";
+      const apiName = "vAPI";
       const path = "/pages";
       const myInit = {
         headers: {

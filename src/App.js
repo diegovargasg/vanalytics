@@ -4,6 +4,7 @@ import Page from "./scenes/Page/";
 import AllPagesViews from "./scenes/AllPagesViews/";
 import ViewsByPageId from "./scenes/ViewsByPageId/";
 import ViewsByCountry from "./scenes/ViewsByCountry/";
+import ViewsByBrowser from "./scenes/ViewsByBrowser/";
 import RateViewsByPageId from "./scenes/RateViewsByPageId/";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/allPagesViews" component={AllPagesViews} />
             <Route path="/viewsByPageId" component={ViewsByPageId} />
             <Route path="/viewsByCountry" component={ViewsByCountry} />
+            <Route path="/viewsByBrowser" component={ViewsByBrowser} />
             <Route path="/rateViewsByPageId" component={RateViewsByPageId} />
             <Route path="/page/:id" exact component={Page} />
           </Switch>

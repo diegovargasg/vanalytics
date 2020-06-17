@@ -6,8 +6,8 @@ function ViewsByCountry(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiName = "users";
-      const path = "/page/1";
+      const apiName = "vAPI";
+      const path = "/pages/country/Brazil";
       const myInit = {
         headers: {
           "Content-Type": "application/json",
