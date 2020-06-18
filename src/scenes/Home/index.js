@@ -7,39 +7,39 @@ function Home(props) {
     <React.Fragment>
       <h2>Frontend</h2>
       <ListGroup>
-        <ListGroup.Item action>
-          <Link to="/page/1">Page one</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/page/2">Page two</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/page/3">Page three</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/page/4">Page four</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/page/5">Page five</Link>
-        </ListGroup.Item>
+        <Link to="/page/1">
+          <ListGroup.Item action>Page one</ListGroup.Item>
+        </Link>
+        <Link to="/page/2">
+          <ListGroup.Item action>Page two</ListGroup.Item>
+        </Link>
+        <Link to="/page/3">
+          <ListGroup.Item action>Page three</ListGroup.Item>
+        </Link>
+        <Link to="/page/4">
+          <ListGroup.Item action>Page four</ListGroup.Item>
+        </Link>
+        <Link to="/page/5">
+          <ListGroup.Item action>Page five</ListGroup.Item>
+        </Link>
       </ListGroup>
       <h2 className="mt-5">API Tester</h2>
       <ListGroup>
-        <ListGroup.Item action>
-          <Link to="/allPagesViews">All pages views</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/viewsByPageId">Views by pageId</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/viewsByCountry">Views by country</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/viewsByBrowser">Views by browser</Link>
-        </ListGroup.Item>
-        <ListGroup.Item action>
-          <Link to="/rateViews">Rate Views</Link>
-        </ListGroup.Item>
+        <Link to="/allPagesViews">
+          <ListGroup.Item action>All pages views</ListGroup.Item>
+        </Link>
+        <Link to="/viewsByPageId">
+          <ListGroup.Item action>Views by pageId</ListGroup.Item>
+        </Link>
+        <Link to="/viewsByCountry">
+          <ListGroup.Item action>Views by country</ListGroup.Item>
+        </Link>
+        <Link to="/viewsByBrowser">
+          <ListGroup.Item action>Views by browser</ListGroup.Item>
+        </Link>
+        <Link to="/rateViews">
+          <ListGroup.Item action>Rate Views</ListGroup.Item>
+        </Link>
       </ListGroup>
     </React.Fragment>
   );
