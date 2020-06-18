@@ -20,11 +20,7 @@ function Page(props) {
   const [rateInfo, setRateInfo] = useState({});
   const [chartData, setChartData] = useState([]);
   const [totalUsersVisits, setTotalUsersVisits] = useState(0);
-  const [pageId, setPageId] = useState(0);
-
-  useEffect(() => {
-    setPageId(props.match.params.id);
-  }, []);
+  const [pageId, setPageId] = useState(props.match.params.id);
 
   useEffect(() => {
     const fetchActiveUsers = async () => {
