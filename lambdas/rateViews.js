@@ -70,7 +70,10 @@ exports.handler = async (event, context) => {
       }
     });
 
-    rate = Math.round((recurrentUsers / totalUsers) * 100);
+    rate =
+      totalUsers === 0
+        ? totalUsers
+        : Math.round((recurrentUsers / totalUsers) * 100);
 
     responseBody = JSON.stringify({
       rate,

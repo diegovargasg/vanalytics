@@ -17,6 +17,7 @@ function Page(props) {
   const [activeUsers, setActiveUsers] = useState(0);
   const [rateInfo, setRateInfo] = useState({});
   const [chartData, setChartData] = useState([]);
+  const [totalUsersVisits, setTotalUsersVisits] = useState(0);
   const pageId = props.match.params.id;
 
   useEffect(() => {
@@ -81,8 +82,9 @@ function Page(props) {
         };
 
         const response = await API.get(apiConfig.name, path, reqParams);
-        const countriesCount = {};
+        setTotalUsersVisits(response.Count);
 
+        const countriesCount = {};
         response.Items.forEach((view) => {
           if (countriesCount.hasOwnProperty(view.country)) {
             countriesCount[view.country] = countriesCount[view.country] + 1;
@@ -94,11 +96,9 @@ function Page(props) {
         //Format the data for the charts library
         const data = [];
         for (let [country, count] of Object.entries(countriesCount)) {
-          console.log(country);
           data.push({ country: country, visits: count });
         }
         setChartData(data);
-        console.log(response, countriesCount);
       } catch (error) {
         console.log(error);
       }
@@ -120,6 +120,8 @@ function Page(props) {
       <span>{rateInfo.recurrentUsers}</span>
       <h2>Rate:</h2>
       <span>{rateInfo.rate}</span>
+      <h2>Total users visits:</h2>
+      <span>{totalUsersVisits}</span>
       <BarChart
         width={900}
         height={300}
