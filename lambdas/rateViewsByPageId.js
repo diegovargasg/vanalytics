@@ -5,13 +5,9 @@ const AWS = require("aws-sdk");
 exports.handler = async (event, context) => {
   const documentClient = new AWS.DynamoDB.DocumentClient();
 
-  const { pageId } = event.pathParameters;
-  if (event.queryStringParameters != null) {
-    var { startDate, endDate } = event.queryStringParameters;
-  }
-
   let responseBody = "";
   let statusCode = 0;
+  const { pageId } = event.pathParameters;
 
   const params = {
     TableName: "views",
@@ -21,10 +17,15 @@ exports.handler = async (event, context) => {
     },
   };
 
+  if (event.queryStringParameters != null) {
+    var { startDate, endDate } = event.queryStringParameters;
+  }
+
   if (startDate != null) {
     params[
       "FilterExpression"
     ] = `${params["FilterExpression"]} AND #date >= :startDate`;
+
     params["ExpressionAttributeValues"][":startDate"] = startDate;
   }
 
@@ -44,10 +45,45 @@ exports.handler = async (event, context) => {
 
   try {
     const data = await documentClient.scan(params).promise();
-    responseBody = JSON.stringify(data);
+
+    const uniqueUsers = new Set();
+    let recurrentUsers = 0;
+    let totalUsers = 0;
+    let rate = 0;
+
+    data.Items.forEach((view) => {
+      uniqueUsers.add(view.user_id);
+    });
+
+    totalUsers = uniqueUsers.size;
+
+    for (let user of uniqueUsers) {
+      let cont = 0;
+      data.Items.some((view) => {
+        if (view.user_id === user) {
+          cont++;
+        }
+        //it is a recurring visitor
+        if (cont >= 2) {
+          recurrentUsers++;
+          uniqueUsers.delete(user);
+          return true;
+        }
+      });
+    }
+
+    rate = Math.round((recurrentUsers / totalUsers) * 100);
+
+    responseBody = JSON.stringify({
+      rate,
+      recurrentUsers,
+      totalUsers,
+    });
+
+    //responseBody = JSON.stringify(data);
     statusCode = 200;
   } catch (error) {
-    responseBody = `unable to get player ${error}`;
+    responseBody = `unable to get views ${error}`;
     statusCode = 403;
   }
 

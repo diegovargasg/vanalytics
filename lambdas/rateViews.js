@@ -15,14 +15,23 @@ exports.handler = async (event, context) => {
     var { startDate, endDate } = event.queryStringParameters;
   }
 
-  if (startDate != null && endDate != null) {
-    params["FilterExpression"] = "#date BETWEEN :startDate AND :endDate";
+  if (startDate != null) {
+    params["FilterExpression"] = "#date >= :startDate";
 
     params["ExpressionAttributeValues"] = {
       ":startDate": startDate,
-      ":endDate": endDate,
     };
+  }
 
+  if (endDate != null) {
+    params[
+      "FilterExpression"
+    ] = `${params["FilterExpression"]} AND #date <= :endDate`;
+
+    params["ExpressionAttributeValues"][":endDate"] = endDate;
+  }
+
+  if (startDate != null || endDate != null) {
     params["ExpressionAttributeNames"] = {
       "#date": "date",
     };
