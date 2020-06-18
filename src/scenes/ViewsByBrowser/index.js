@@ -1,44 +1,66 @@
 import React, { useEffect, useState } from "react";
-import { API, Auth } from "aws-amplify";
+import { API } from "aws-amplify";
+import APIConfig from "../../APIConfig";
+import Form from "react-bootstrap/Form";
 
 function ViewsByBrowser(props) {
   const [response, setResponse] = useState("");
+  const [browser, setBrowser] = useState("Sierra");
+  const [request, setRequest] = useState("");
+  const [totalViews, setTotalViews] = useState(0);
+
+  const handleChange = (event) => {
+    setBrowser(event.currentTarget.value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiName = "vAPI";
-      const path = "/pages/browser/Sierra";
-      const myInit = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${(await Auth.currentSession())
-            .getIdToken()
-            .getJwtToken()}`,
-        },
-        response: false, // OPTIONAL (return the entire Axios response object instead of only response.data)
-      };
+      try {
+        const apiConfig = await APIConfig();
+        const apiName = apiConfig.name;
+        const path = `/pages/browser/${browser}`;
+        const reqParams = {
+          headers: apiConfig.headers,
+          response: false,
+        };
 
-      API.get(apiName, path, myInit)
-        .then((response) => {
-          console.log(response);
-          setResponse(JSON.stringify(response.Items));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        const response = await API.get(apiName, path, reqParams);
+        setResponse(JSON.stringify(response.Items, null, 2));
+        setRequest(`${apiConfig.endpoint}${path}`);
+        setTotalViews(response.Count);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
-  }, []);
+  }, [browser]);
 
   return (
     <React.Fragment>
-      <h2>Views by page id</h2>
+      <h2 className="mb-5">Views for browser {browser}</h2>
+      <Form.Group className="mb-5">
+        <Form.Label>
+          <h4>Try another browser:</h4>
+        </Form.Label>
+        <Form.Control as="select" onChange={handleChange}>
+          <option>Sierra</option>
+          <option>Charlie</option>
+          <option>Whiskey</option>
+          <option>Zulu</option>
+          <option>Oscar</option>
+          <option>Alfa</option>
+          <option>Romeo</option>
+          <option>Kilo</option>
+          <option>Uniform</option>
+          <option>Yankee</option>
+          <option>Quebec</option>
+        </Form.Control>
+      </Form.Group>
+      <h4 className="mb-5">Total views: {totalViews}</h4>
       <h4>Request:</h4>
-      <code>
-        https://phats8hfgg.execute-api.eu-central-1.amazonaws.com/prod
-      </code>
-      <h4>Result:</h4>
-      <code>{response}</code>
+      <code>{request}</code>
+      <h4 className="mt-5">Result:</h4>
+      <pre>{response}</pre>
     </React.Fragment>
   );
 }

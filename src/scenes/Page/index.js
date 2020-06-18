@@ -5,26 +5,31 @@ import moment from "moment";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
+import CardDeck from "react-bootstrap/CardDeck";
+import Card from "react-bootstrap/Card";
 
 function Page(props) {
   const [activeUsers, setActiveUsers] = useState(0);
   const [rateInfo, setRateInfo] = useState({});
   const [chartData, setChartData] = useState([]);
   const [totalUsersVisits, setTotalUsersVisits] = useState(0);
-  const pageId = props.match.params.id;
+  const [pageId, setPageId] = useState(0);
+
+  useEffect(() => {
+    setPageId(props.match.params.id);
+  }, []);
 
   useEffect(() => {
     const fetchActiveUsers = async () => {
       const endDate = moment().unix();
       const startDate = moment().subtract(30, "minutes").unix();
-      //const startDate = 1585699200;
 
       try {
         const apiConfig = await APIConfig();
@@ -107,39 +112,66 @@ function Page(props) {
     fetchActiveUsers();
     fetchReturningUsers();
     fetchPageViewByCountries();
-  }, []);
+  }, [pageId]);
 
   return (
     <React.Fragment>
-      <h1>Page</h1>
-      <h2>Active Users last 30min:</h2>
-      <span>{activeUsers}</span>
-      <h2>Total users last day:</h2>
-      <span>{rateInfo.totalUsers}</span>
-      <h2>Returning Users:</h2>
-      <span>{rateInfo.recurrentUsers}</span>
-      <h2>Rate:</h2>
-      <span>{rateInfo.rate}</span>
-      <h2>Total users visits:</h2>
-      <span>{totalUsersVisits}</span>
-      <BarChart
-        width={900}
-        height={300}
-        data={chartData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="country" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="visits" fill="#8884d8" />
-      </BarChart>
+      <h2>Page ID: {pageId}</h2>
+      <CardDeck className="mt-5 mb-5">
+        <Card>
+          <Card.Body>
+            <Card.Title>Active Users last 30min</Card.Title>
+          </Card.Body>
+          <Card.Footer className="text-center">{activeUsers}</Card.Footer>
+        </Card>
+        <Card>
+          <Card.Body>
+            <Card.Title>Total users in the last day</Card.Title>
+          </Card.Body>
+          <Card.Footer className="text-center">
+            {rateInfo.totalUsers}
+          </Card.Footer>
+        </Card>
+        <Card>
+          <Card.Body>
+            <Card.Title>Returning Users</Card.Title>
+          </Card.Body>
+          <Card.Footer className="text-center">
+            {rateInfo.recurrentUsers}
+          </Card.Footer>
+        </Card>
+        <Card>
+          <Card.Body>
+            <Card.Title>Returning Users rate</Card.Title>
+          </Card.Body>
+          <Card.Footer className="text-center">{rateInfo.rate}</Card.Footer>
+        </Card>
+        <Card>
+          <Card.Body>
+            <Card.Title>Total visits</Card.Title>
+          </Card.Body>
+          <Card.Footer className="text-center">{totalUsersVisits}</Card.Footer>
+        </Card>
+      </CardDeck>
+      <h2 className="mt-5 mb-5">Total users by country</h2>
+      <ResponsiveContainer height={300} width="95%">
+        <BarChart
+          data={chartData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="country" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="visits" fill="#004085" />
+        </BarChart>
+      </ResponsiveContainer>
     </React.Fragment>
   );
 }

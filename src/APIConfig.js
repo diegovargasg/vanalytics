@@ -8,6 +8,7 @@ const APIConfig = async () => {
       "Content-Type": "application/json",
       Authorization: (await Auth.currentSession()).getIdToken().getJwtToken(),
     },
+    endpoint: awsExports.API.endpoints[0].endpoint,
   };
   return configValues;
 };
