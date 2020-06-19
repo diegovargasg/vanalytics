@@ -23,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "vinstall-windows": "cd src && npm install && copy config.example aws-exports.js",
+    "vinstall": "cd src && npm install && cp config.example aws-exports.js"
   },
   "eslintConfig": {
     "extends": "react-app"

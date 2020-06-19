@@ -42,6 +42,7 @@ function Page(props) {
 
         const response = await API.get(apiConfig.name, path, reqParams);
         setActiveUsers(response.Count);
+        console.log("%c API Response", "font-size: 16px; color: #f09030;");
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -65,8 +66,9 @@ function Page(props) {
         };
 
         const response = await API.get(apiConfig.name, path, reqParams);
-        setRateInfo(response);
+        console.log("%c API Response", "font-size: 16px; color: #f09030;");
         console.log(response);
+        setRateInfo(response);
       } catch (error) {
         console.log(error);
       }
@@ -83,6 +85,8 @@ function Page(props) {
         };
 
         const response = await API.get(apiConfig.name, path, reqParams);
+        console.log("%c API Response", "font-size: 16px; color: #f09030;");
+        console.log(response);
         setTotalUsersVisits(response.Count);
 
         const countriesCount = {};

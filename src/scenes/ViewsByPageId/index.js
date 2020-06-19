@@ -24,6 +24,8 @@ function ViewsByPageId(props) {
           response: false,
         };
         const response = await API.get(apiName, path, reqParams);
+        console.log("%c API Response", "font-size: 16px; color: #f09030;");
+        console.log(response);
         setResponse(JSON.stringify(response.Items, null, 2));
         setRequest(`${apiConfig.endpoint}${path}`);
         setTotalViews(response.Count);

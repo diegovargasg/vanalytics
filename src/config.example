@@ -1,0 +1,23 @@
+const awsmobile = {
+  aws_project_region: "eu-central-1",
+  aws_cognito_identity_pool_id:
+    "eu-central-1:cbda0dd1-b10f-4964-a1b3-d626a24f6e28",
+  aws_cognito_region: "eu-central-1",
+  aws_user_pools_id: "eu-central-1_nSo4RfFsG",
+  aws_user_pools_web_client_id: "7a2orqvs6judtt2dt5us1kmop2",
+  oauth: {},
+  aws_content_delivery_bucket: "veeva-20200616212230-hostingbucket-dev",
+  aws_content_delivery_bucket_region: "eu-central-1",
+  aws_content_delivery_url: "https://d2ylw8wbyakbf5.cloudfront.net",
+  API: {
+    endpoints: [
+      {
+        name: "vAPI",
+        endpoint:
+          "https://phats8hfgg.execute-api.eu-central-1.amazonaws.com/prod",
+      },
+    ],
+  },
+};
+
+export default awsmobile;
