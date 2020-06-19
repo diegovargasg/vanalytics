@@ -22,7 +22,7 @@ Developed with Reactjs, AWS, DynamoDB, Lambdas and API Gateway.
 
 ### Architecture
 
-![Alt text](diagram.jpg?raw=true "architecture")
+![Alt text](https://github.com/diegovargasg/vanalytics/blob/master/diagram.jpg?raw=true "architecture")
 
 ### Installation
 
