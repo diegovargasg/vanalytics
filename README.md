@@ -39,7 +39,6 @@ _In case you are using windows run the command: npm run v-install-windows_
 ### Serve client
 
 ```sh
-$ cd src
 $ npm start
 ```
 
