@@ -31,16 +31,16 @@ Clone the respository and install npm and composer dependencies.
 ```sh
 $ git clone https://github.com/diegovargasg/vanalytics.git
 $ cd vanalytics
-$ npm run vinstall
+$ npm run v-install
 ```
 
-_In case you are using windows run the command: npm run vinstall-windows_
+_In case you are using windows run the command: npm run v-install-windows_
 
 ### Serve client
 
 ```sh
-$ cd client
-$ npm run serve
+$ cd src
+$ npm start
 ```
 
 The client server should be running now, usually under:
